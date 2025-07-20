@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lumina Library | Cahaya Pengetahuan Digital 💡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- General Styling & Font --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: #f0f4f8; /* Very Light Blue-Gray */
+            color: #334e68; /* Darker Slate Blue */
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Smooth scroll overall */
+        }
+
+        /* --- Header Section --- */
+        header {
+            background: linear-gradient(135deg, #4a00e0 0%, #8e2de2 100%); /* Deep Purple to Electric Violet */
+            color: #ffffff;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2em;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            font-weight: 800; /* Extra bold */
+        }
+
+        header h1 .icon {
+            font-size: 1.3em;
+            color: #ffcc00; /* Bright Yellow */
+            animation: bounce 2s infinite ease-in-out; /* Simple bounce animation */
+        }
+
+        header p {
+            font-size: 1.3em;
+            margin-top: 15px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* --- Navigation Bar --- */
+        nav {
+            background-color: #ff9900; /* Bright Orange */
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            position: sticky; /* Sticky navigation */
+            top: 0;
+            z-index: 99;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.7rem 1.8rem;
+            margin: 0 12px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            border-radius: 30px; /* Pill-shaped buttons */
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #e68a00; /* Slightly Darker Orange */
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 25px;
+        }
+
+        /* --- Section Styling (General) --- */
+        section {
+            background-color: #ffffff;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* For scroll reveal */
+            transform: translateY(30px); /* For scroll reveal */
+            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden; /* For pseudo-elements */
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: #6a1b9a; /* Deep Purple Shade */
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 2.5em;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffcc00 0%, #ff9900 100%); /* Yellow to Orange gradient */
+            border-radius: 2px;
+        }
+
+        /* --- Profile Section (Hero) --- */
+        #profile {
+            background: linear-gradient(45deg, #1e3c72 0%, #2a5298 100%); /* Dark Blue to Medium Blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        #profile::before {
+            content: '📚💡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15em; /* Larger background icon */
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none; /* Make sure it doesn't interfere with clicks */
+        }
+
+        #profile h2 {
+            color: #ffffff; /* White for profile H2 */
+            font-size: 3.8em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            font-weight: 800;
+        }
+
+        #profile h2::after {
+            background: linear-gradient(90deg, #ffeb3b 0%, #ff9800 100%); /* Brighter gradient for profile H2 underline */
+        }
+
+        #profile p {
+            font-size: 1.4em;
+            max-width: 900px;
+            margin: 1rem auto 3rem auto;
+            line-height: 1.8;
+            font-weight: 300;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        #profile .call-to-action {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffcc00 0%, #ff9900 100%); /* Yellow to Orange Gradient */
+            color: #334e68; /* Darker Slate Blue */
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        #profile .call-to-action:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            filter: brightness(1.1); /* Slight brightness on hover */
+        }
+
+        /* --- Search Bar --- */
+        .search-container {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-container input[type="text"] {
+            width: 70%;
+            max-width: 500px;
+            padding: 15px 20px;
+            border: 2px solid #a7d9f7; /* Light Blue Border */
+            border-radius: 30px;
+            font-size: 1.1em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: #2196f3; /* Brighter Blue on Focus */
+            box-shadow: 0 0 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .search-container button {
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%); /* Bright Blue Gradient */
+            color: #ffffff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Book Grid & Cards --- */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            justify-content: center;
+        }
+
+        .book-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .book-card img {
+            max-width: 160px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            border: 2px solid #ffcc00; /* Yellow border for covers */
+        }
+
+        .book-card h3 {
+            color: #4a00e0; /* Deep Purple */
+            font-size: 1.5em;
+            margin-top: 0.8rem;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+        }
+
+        .book-card p {
+            color: #526c86; /* Medium Slate Blue */
+            font-size: 0.95em;
+            margin-bottom: 1rem;
+        }
+
+        .book-card .category {
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%); /* Bright Blue Gradient */
+            color: #ffffff;
+            font-size: 0.85em;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: auto; /* Push to bottom */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .book-card .category:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Book Detail Modal --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            backdrop-filter: blur(8px); /* Blur background */
+            -webkit-backdrop-filter: blur(8px); /* For Safari */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: auto;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            position: relative;
+            animation: fadeInScale 0.4s ease-out;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-content img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            border: 3px solid #ff9900;
+        }
+
+        .modal-content h3 {
+            color: #4a00e0;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            color: #526c86;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .modal-content .modal-author, .modal-content .modal-category {
+            font-weight: 600;
+            color: #6a1b9a;
+        }
+        .modal-content .modal-category {
+            background-color: #00c6ff;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .modal-content .read-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9900 0%, #e68a00 100%); /* Orange Gradient */
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 15px;
+            width: fit-content;
+            align-self: center; /* Center the button in flex column */
+        }
+
+        .modal-content .read-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #8e2de2;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Testimonials Section --- */
+        #testimonials {
+            background: linear-gradient(135deg, #a7d9f7 0%, #2196f3 100%); /* Light Blue to Bright Blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #testimonials h2 {
+            color: #ffffff;
+            border-bottom-color: #ffcc00;
+        }
+
+        #testimonials h2::after {
+            background: linear-gradient(90deg, #ffcc00 0%, #ff9900 100%);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-card p {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #334e68;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card .author {
+            font-weight: 700;
+            color: #4a00e0;
+            font-size: 1em;
+        }
+        .testimonial-card .author::before {
+            content: "— ";
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            padding: 3rem;
+            text-align: center;
+        }
+
+        #contact h2 {
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form label {
+            text-align: left;
+            font-weight: 600;
+            color: #334e68;
+            margin-bottom: 5px;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: calc(100% - 20px); /* Adjust for padding */
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: #8e2de2;
+            box-shadow: 0 0 8px rgba(142, 45, 226, 0.2);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background: linear-gradient(45deg, #8e2de2 0%, #4a00e0 100%); /* Purple Gradient */
+            color: #ffffff;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Founder Section --- */
+        .founder-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .founder-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            text-align: center;
+            flex: 1;
+            min-width: 300px;
+            max-width: 48%; /* Adjust for spacing */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            backdrop-filter: blur(5px); /* Glassmorphism effect */
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+        }
+
+        .founder-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .founder-card img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid #ffcc00; /* Bright Yellow Border */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .founder-card h3 {
+            color: #4a00e0; /* Deep Purple */
+            font-size: 1.8em;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+        }
+
+        .founder-card .role {
+            color: #ff9900; /* Bright Orange */
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .founder-card p {
+            color: #526c86; /* Medium Slate Blue */
+            font-size: 1em;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%); /* Electric Violet to Deep Purple */
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            font-size: 0.95em;
+            box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 2.5em;
+                gap: 10px;
+            }
+            header p {
+                font-size: 1.1em;
+            }
+            nav a {
+                padding: 0.6rem 1.2rem;
+                margin: 0 8px;
+                font-size: 0.9em;
+            }
+            #profile {
+                padding: 4rem 1.5rem;
+            }
+            #profile h2 {
+                font-size: 3em;
+            }
+            #profile p {
+                font-size: 1.2em;
+            }
+            .book-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            .founder-card {
+                max-width: 80%;
+                min-width: unset;
+                flex: none;
+            }
+            .search-container input[type="text"] {
+                width: 90%;
+            }
+            .search-container button {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+                flex-direction: column;
+                gap: 5px;
+            }
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0.8rem;
+            }
+            nav a {
+                flex: 1 1 auto;
+                margin: 5px;
+            }
+            .container {
+                margin: 1.5rem auto;
+                padding: 0 15px;
+            }
+            section {
+                padding: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            h2 {
+                font-size: 2em;
+            }
+            #profile h2 {
+                font-size: 2.5em;
+            }
+            #profile p {
+                font-size: 1em;
+            }
+            #profile .call-to-action {
+                padding: 15px 30px;
+                font-size: 1em;
+            }
+            .book-card {
+                padding: 1.2rem 1rem;
+            }
+            .founder-card {
+                min-width: unset;
+                max-width: 100%;
+            }
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .modal-content img {
+                max-width: 150px;
+            }
+            .modal-content h3 {
+                font-size: 1.8em;
+            }
+            .modal-content p {
+                font-size: 0.95em;
+            }
+            .close-button {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="icon">📚</span> The Lumina Library <span class="icon">✨</span></h1>
+        <p>"Gerbang Anda Menuju Pengetahuan Tak Terbatas"</p>
+    </header>
+
+    <nav>
+        <a href="#profile">Profil</a>
+        <a href="#featured">Pilihan Kami</a>
+        <a href="#categories">Kategori</a>
+        <a href="#testimonials">Testimoni</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#contact">Kontak</a>
+    </nav>
+
+    <main class="container">
+        <section id="profile" class="scroll-reveal">
+            <h2>Selamat Datang di The Lumina Library</h2>
+            <p>
+                Selami lautan pengetahuan digital kami yang luas. <b>The Lumina Library</b> berkomitmen untuk menyediakan akses mudah ke ribuan buku, jurnal, dan sumber daya edukasi. Kami hadir untuk <b>menerangi pikiran Anda dan memperluas cakrawala dunia Anda</b>. Mulai petualangan membaca Anda sekarang!
+            </p>
+            <a href="#featured" class="call-to-action">Jelajahi Koleksi Kami</a>
+        </section>
+
+        <section id="featured" class="scroll-reveal">
+            <h2>Buku Pilihan Teratas 🌟</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Cari judul, penulis, atau kategori...">
+                <button onclick="filterBooks()">Cari</button>
+            </div>
+            <div class="book-grid" id="bookGrid">
+                </div>
+        </section>
+
+        <section id="categories" class="scroll-reveal">
+            <h2>Telusuri Berdasarkan Kategori 📚</h2>
+            <p style="text-align: center; font-size: 1.15em; margin-bottom: 2.5rem; color: #526c86;">
+                Jelajahi dunia pengetahuan dengan mudah melalui kategori pilihan kami.
+            </p>
+            <div class="book-grid">
+                <div class="book-card category-card" data-category="Fiksi">
+                    <h3>Fiksi 📖</h3>
+                    <p>Novel, Cerpen, Puisi, Fantasi</p>
+                    <span class="category">120+ Judul</span>
+                </div>
+                <div class="book-card category-card" data-category="Sains">
+                    <h3>Sains 🔬</h3>
+                    <p>Fisika, Biologi, Kimia, Astronomi</p>
+                    <span class="category">85+ Judul</span>
+                </div>
+                <div class="book-card category-card" data-category="Teknologi">
+                    <h3>Teknologi 💾</h3>
+                    <p>Pemrograman, AI, Jaringan, UX/UI</p>
+                    <span class="category">70+ Judul</span>
+                </div>
+                <div class="book-card category-card" data-category="Sejarah">
+                    <h3>Sejarah 🌍</h3>
+                    <p>Peradaban Kuno, Sejarah Modern</p>
+                    <span class="category">90+ Judul</span>
+                </div>
+                <div class="book-card category-card" data-category="Bisnis">
+                    <h3>Bisnis 📈</h3>
+                    <p>Manajemen, Keuangan, Pemasaran</p>
+                    <span class="category">60+ Judul</span>
+                </div>
+                <div class="book-card category-card" data-category="Gaya Hidup">
+                    <h3>Gaya Hidup 🧘‍♀️</h3>
+                    <p>Kesehatan, Kuliner, Perjalanan, Fotografi</p>
+                    <span class="category">55+ Judul</span>
+                </div>
+                <div class="book-card category-card" data-category="Edukasi">
+                    <h3>Edukasi 🧒</h3>
+                    <p>Dongeng, Buku Bergambar, Belajar</p>
+                    <span class="category">40+ Judul</span>
+                </div>
+                 <div class="book-card category-card" data-category="Seni">
+                    <h3>Seni 🎨</h3>
+                    <p>Seni, Lukisan, Fotografi, Arsitektur</p>
+                    <span class="category">30+ Judul</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="scroll-reveal">
+            <h2>Apa Kata Pembaca Kami? 💬</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"The Lumina Library benar-benar mengubah cara saya mengakses buku. Koleksinya lengkap, antarmukanya mudah digunakan, dan desainnya sangat menarik! Saya ketagihan membaca di sini."</p>
+                    <span class="author">Aisha Rahman, Mahasiswa</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Sebagai seorang profesional yang sibuk, Lumina Library adalah penyelamat. Saya bisa mencari referensi kapan saja dan di mana saja. Fitur pencariannya sangat membantu!"</p>
+                    <span class="author">Budi Santoso, Developer IT</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Saya suka sekali dengan pilihan buku fiksi di sini. Animasi dan responsifnya membuat pengalaman membaca jadi lebih menyenangkan. Rekomendasi terbaik untuk pecinta buku digital!"</p>
+                    <span class="author">Citra Dewi, Penulis</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="scroll-reveal">
+            <h2>Tentang The Lumina Library 🌟</h2>
+            <p style="text-align: center; font-size: 1.15em; max-width: 900px; margin: 0 auto 3rem auto; color: #526c86;">
+                Didirikan pada tahun 2025, The Lumina Library berawal dari impian untuk menciptakan ruang digital yang inklusif, di mana ilmu pengetahuan dapat diakses oleh semua orang. Kami berdedikasi untuk terus memperluas koleksi kami dan meningkatkan pengalaman membaca Anda.
+            </p>
+            <h3>Pendiri Kami, Sang Pencerah</h3>
+            <div class="founder-grid">
+                <div class="founder-card">
+                    <img src="foto1.JPEG" alt="foto1">
+                    <h3>Muhammad Turaichan Syarofi</h3>
+                    <p class="role">PENDIDIKAN INFORMATIKA</p>
+                    <p>Turaichan adalah arsitek konseptual di balik Lumina Library, membawa visi perpustakaan digital yang intuitif dan menginspirasi.</p>
+                </div>
+                <div class="founder-card">
+                    <img src="bisma1.JPEG" alt="bisma1">
+                    <h3>Bisma Reihan</h3>
+                    <p class="role"> PENDIDIKAN INFORMATIKA </p>
+                    <p>Bisma adalah pilar teknis, memastikan platform Lumina Library stabil, cepat, dan selalu inovatif.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-reveal">
+            <h2>Hubungi Kami 📧</h2>
+            <p style="text-align: center; font-size: 1.15em; margin-bottom: 2.5rem; color: #526c86;">
+                Punya pertanyaan, saran, atau ingin berkolaborasi? Jangan ragu hubungi kami!
+            </p>
+            <form class="contact-form">
+                <label for="name">Nama Lengkap:</label>
+                <input type="text" id="name" name="name" required placeholder="Masukkan nama Anda">
+
+                <label for="email">Email Anda:</label>
+                <input type="email" id="email" name="email" required placeholder="Masukkan email aktif Anda">
+
+                <label for="subject">Subjek:</label>
+                <input type="text" id="subject" name="subject" required placeholder="Subjek pesan Anda">
+
+                <label for="message">Pesan Anda:</label>
+                <textarea id="message" name="message" rows="6" required placeholder="Tulis pesan Anda di sini..."></textarea>
+
+                <button type="submit">Kirim Pesan</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 The Lumina Library. All rights reserved. | Didesain dengan ✨ oleh Tim Lumina.</p>
+    </footer>
+
+    <div id="bookDetailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img src="" id="modalBookImage" alt="Book Cover">
+            <h3 id="modalBookTitle"></h3>
+            <p class="modal-author" id="modalBookAuthor"></p>
+            <p id="modalBookDescription"></p>
+            <span class="modal-category" id="modalBookCategory"></span>
+            <a href="#" id="modalReadButton" class="read-button" target="_blank">Baca Sekarang 🚀</a>
+        </div>
+    </div>
+
+    <script>
+        // Data Dummy untuk Buku (bisa lebih banyak)
+        const booksData = [
+            {
+                id: 1,
+                title: "Beyond The Stars",
+                author: "Nova Andromeda",
+                category: "Fiksi Ilmiah",
+                image: "beyond.jpg",
+                description: "Sebuah epik fiksi ilmiah yang membawa pembaca melintasi galaksi, mengungkap misteri alam semesta dan takdir kemanusiaan.",
+                bookLink: "https://haytorview.devon.sch.uk/wp-content/uploads/Beyond-the-Stars-Sarah-Webb-1.pdf" // Contoh tautan buku
+            },
+            {
+                id: 2,
+                title: "Manajemen Bisnis",
+                author: "Suhadarliyah DKK",
+                category: "Bisnis",
+                image: "manajemen_bisnis.jpg",
+                description: "Pemahaman perkembangan industri startup dalam pendekatan konsep dasar kinerja.",
+                bookLink: "https://drive.google.com/file/d/1ztW_WOT90Aw1VzaSl7ZuzWSOTcVLYVNs/view?usp=drive_link"
+            },
+            {
+                id: 3,
+                title: "Transformasi Digital",
+                author: "Tita Aisyah DKK",
+                category: "Teknologi",
+                image: "transformasi_digital.jpg",
+                description: "Pengantar literasi digital untuk mahasiswa.",
+                bookLink: "https://drive.google.com/file/d/1Gw1YxNGr5nGJDPYTn0Pnpe6hDmQGgvXz/view?usp=drive_link"
+            },
+            {
+                id: 4,
+                title: "Simulasi Digital",
+                author: "Dr. Daryono, M.Pd. DKK",
+                category: "Teknologi",
+                image: "simdig.jpg",
+                description: "Pemanfaatan teknologi informasi dalam pendidikan untuk menyampaikan materi pembelajaran berbasis internet atau dalam jaringan.",
+                bookLink: "https://drive.google.com/file/d/1X4KbraffKiaNRBdMuVbA1j1U9OXkYgwt/view?usp=drive_link"
+            },
+            {
+                id: 5,
+                title: "Pengantar Manajemen Operasional",
+                author: "Anwar DKK",
+                category: "Bisnis",
+                image: "pengantar.jpg",
+                description: "Mengkaji dan memahami berbagai konsep dasar manajemen operasional, khususnya bagi calon manajer operasi pemula.",
+                bookLink: "https://drive.google.com/file/d/1Jv39-jDAAoaM7-3qwzQXJ3SaLj0CCrUA/view?usp=drive_link"
+            },
+            {
+                id: 6,
+                title: "Buku Saku Tasawuf",
+                author: "Haidar Bagir",
+                category: "Edukasi",
+                image: "tasawuf.jpg",
+                description: "Memahami konsep-konsep dasar ilmu tasawuf.",
+                bookLink: "https://drive.google.com/file/d/1KRZeRjC1DBNMCRMYmfgn8aBcwSZBU4Eq/view?usp=drive_link"
+            },
+            {
+                id: 7,
+                title: "Teori Ekonomi Modern: Mikro dan Makro",
+                author: "Prof. Ekonomi Jaya",
+                category: "Bisnis",
+                image: "teori_ekonomi.jpg",
+                description: "Pengantar mendalam tentang prinsip-prinsip ekonomi makro, kebijakan fiskal, dan moneter.",
+                bookLink: "https://repository.minhajpustaka.id/media/publications/592772-teori-ekonomi-modern-mikro-dan-makro-c490b175.pdf"
+            },
+            {
+                id: 8,
+                title: "Sejarah dan pembangunan pariwisata, pos, dan telekomunikasi",
+                category: "Sejarah",
+                author: "Departemen Pariwisata, Pos, dan Telekomunikasi",
+                image: "sejarah_pembangunan.jpg",
+                description: "Buku ini adalah sarana informasi dan sekaligus untuk upaya pembinaan bangsa, terutama bagi keluarga besar departemen pariwisata, pos, dan telekomunikasi dalam menghayati perjuangan pembangunan bidang parpostel.",
+                bookLink: "https://drive.google.com/file/d/1hHCCC5BtkliKU1cTO-g1hfw3QAVRrqXt/view?usp=drive_link"
+            },
+            {
+                id: 9,
+                title: "Menapak ke arah senja",
+                author: "Fajar M. Fitrah & R. Abdul Aziz",
+                category: "Fiksi",
+                image: "menapak.jpg",
+                description: "Buku yang berisikan berbagai pengalaman puisi yang beragam, ketulusan, dan keanekaragaman.",
+                bookLink: "https://drive.google.com/file/d/11210eK4TpzhAJ5pjoAstLnAvRvGRVxU0/view?usp=drive_link"
+            },
+            {
+                id: 10,
+                title: "Komunikasi budaya dan dokumentasi kontemporer",
+                author: "Agus Rusmana DKK",
+                category: "Seni",
+                image: "budaya.jpg",
+                description: "Buku ini merupakan kumpulan dari berbagai artikel dan pengarang mengenai komunikasi dan budaya kontemporer.",
+                bookLink: "https://drive.google.com/file/d/11GiYOOrlx_x-cYxCvBCFrENsMxpiyX_m/view?usp=drive_link"
+            },
+            {
+                id: 11,
+                title: "Dasar-dasar pemrograman",
+                author: "Shinta Isabella & Miftahul Haq",
+                category: "Teknologi",
+                image: "program.jpg",
+                description: "Buku ini merupakan media belajar untuk mengetahui berbagai macam dasar-dasar pemrograman.",
+                bookLink: "https://drive.google.com/file/d/1YpXh0RUEUD8rKmI0ihmHjXen07RdfXFz/view?usp=drive_link"
+            },
+            {
+                id: 12,
+                title: "BeaSiswo",
+                author: "Muhammad Hammam",
+                category: "Fiksi",
+                image: "beasiswo.jpg",
+                description: "Kumpulan cerpen kehidupan.",
+                bookLink: "https://drive.google.com/file/d/18yIohaCZbLLKu3QvQgBfYFuFoWJXf3UH/view?usp=drive_link"
+            }
+        ];
+
+        const bookGrid = document.getElementById('bookGrid');
+        const searchInput = document.getElementById('searchInput');
+        const modal = document.getElementById('bookDetailModal');
+        const closeButton = document.querySelector('.close-button');
+        const modalBookImage = document.getElementById('modalBookImage');
+        const modalBookTitle = document.getElementById('modalBookTitle');
+        const modalBookAuthor = document.getElementById('modalBookAuthor');
+        const modalBookDescription = document.getElementById('modalBookDescription');
+        const modalBookCategory = document.getElementById('modalBookCategory');
+        const modalReadButton = document.getElementById('modalReadButton'); // Get the new read button
+
+        // Function to render books
+        function renderBooks(booksToRender) {
+            bookGrid.innerHTML = ''; // Clear existing books
+            if (booksToRender.length === 0) {
+                bookGrid.innerHTML = '<p style="text-align: center; width: 100%; color: #526c86; font-size: 1.2em;">Buku tidak ditemukan. Coba kata kunci lain.</p>';
+                return;
+            }
+            booksToRender.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.classList.add('book-card');
+                bookCard.innerHTML = `
+                    <img src="${book.image}" alt="Cover ${book.title}">
+                    <h3>${book.title}</h3>
+                    <p>Penulis: ${book.author}</p>
+                    <span class="category">${book.category}</span>
+                `;
+                // Add click listener to show book detail (which now includes the link)
+                bookCard.addEventListener('click', () => showBookDetail(book));
+                bookGrid.appendChild(bookCard);
+            });
+        }
+
+        // Initial render of all books
+        renderBooks(booksData);
+
+        // Filter Books Function
+        function filterBooks() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filtered = booksData.filter(book =>
+                book.title.toLowerCase().includes(searchTerm) ||
+                book.author.toLowerCase().includes(searchTerm) ||
+                book.category.toLowerCase().includes(searchTerm)
+            );
+            renderBooks(filtered);
+        }
+
+        // Category Card Click Listener
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.dataset.category.toLowerCase();
+                const filtered = booksData.filter(book =>
+                    book.category.toLowerCase().includes(category)
+                );
+                renderBooks(filtered);
+                // Optionally scroll to featured section
+                document.querySelector('#featured').scrollIntoView({ behavior: 'smooth' });
+                // Also update search input to reflect category
+                searchInput.value = card.dataset.category;
+            });
+        });
+
+        // Show Book Detail Modal
+        function showBookDetail(book) {
+            modalBookImage.src = book.image;
+            modalBookTitle.textContent = book.title;
+            modalBookAuthor.textContent = `Penulis: ${book.author}`;
+            modalBookDescription.textContent = book.description;
+            modalBookCategory.textContent = book.category;
+            modalReadButton.href = book.bookLink; // Set the book link for the button
+            modal.style.display = 'flex'; // Use flex to center
+        }
+
+        // Close Modal
+        closeButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        /* --- Scroll Animations --- */
+        const scrollElements = document.querySelectorAll('.scroll-reveal');
+
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            const elementHeight = el.clientHeight;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend &&
+                elementTop + elementHeight > 0
+            );
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('load', handleScrollAnimation); // Trigger on load for elements already in view
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - navHeight - 20;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form Submission (Placeholder - client-side only)
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah refresh halaman
+            alert('Pesan Anda telah terkirim! (Ini adalah simulasi, tidak ada server backend)');
+            this.reset(); // Mengosongkan form
+        });
+
+    </script>
+</body>
+</html>
